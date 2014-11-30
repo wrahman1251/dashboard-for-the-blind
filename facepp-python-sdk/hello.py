@@ -9,8 +9,8 @@
 
 # You need to register your App first, and enter you API key/secret.
 # 您需要先注册一个App，并将得到的API key和API secret写在这里。
-API_KEY = '<your API key here>'
-API_SECRET = '<your API secret here>'
+API_KEY = 'dcfded651e430ab3c7f730501dc14499'
+API_SECRET = 'Sy2ntzPJPCJVPqDEX1vj5FGkEArospDb'
 
 # Import system libraries and define helper functions
 # 导入系统库并定义辅助函数
@@ -37,13 +37,14 @@ api = API(API_KEY, API_SECRET)
 
 # Here are the person names and their face images
 # 人名及其脸部图片
-IMAGE_DIR = 'http://cn.faceplusplus.com/static/resources/python_demo/'
+#IMAGE_DIR = 'http://cn.faceplusplus.com/static/resources/python_demo/'
+IMAGE_DIR = '../app/static/data/flickr8k/imgs/'
 PERSONS = [
-    ('Jim Parsons', IMAGE_DIR + '1.jpg'),
-    ('Leonardo DiCaprio', IMAGE_DIR + '2.jpg'),
-    ('Andy Liu', IMAGE_DIR + '3.jpg')
+    ('Jim Parsons', IMAGE_DIR + '1287475186_2dee85f1a5.jpg'),
+    ('Leonardo DiCaprio', IMAGE_DIR + '3044500219_778f9f2b71.jpg'),
+    ('Andy Liu', IMAGE_DIR + '3354330935_de75be9d2f.jpg')
 ]
-TARGET_IMAGE = IMAGE_DIR + '4.jpg'
+TARGET_IMAGE = IMAGE_DIR + '3354330935_de75be9d2f.jpg'
 
 # Step 1: Detect faces in the 3 pictures and find out their positions and
 # attributes
