@@ -19,19 +19,167 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-  (function() {
-    var cx = '000888210889775888983:j2sd6qidegs';
-    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
-
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="../static/js/bootstrap.min.js"></script>
+        <script src="../static/vis_resources/d3.min.js" charset="utf-8"></script>
+    <script src="../static/vis_resources/jsutils.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="http://cs.stanford.edu/people/karpathy/cssutils.css">
+    <script type="text/javascript">
+        $('.idiv').mouseenter(function() {
+            var utterance = new SpeechSynthesisUtterance($(this).find('.atxt').text());
+            window.speechSynthesis.speak(utterance);
+        })
+    </script>
   </head>
+      <style>
+    body {
+      color: #333;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      font-size: 18px;
+      margin: 0;
+      padding: 0;
+    }
+    #wrap {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .hannot {
+      background-color: #EFE;
+    }
+    .rnnannot {
+      background-color: #EEF; 
+    }
+    .rannot {
+      background-color: #FEE;  
+    }
+    .annot {
+      padding: 3px;
+    }
+    .idiv {
+      display: inline-block;
+      vertical-align: top;
+      margin: 10px;
+    }
+    h1 {
+      font-weight: 300;
+      margin: 0;
+    }
+    h2 {
+      font-weight: 300;
+      font-size: 20px;
+    }
+    #wrap {
+      margin: 20px;
+    }
+    #header {
+      background-color: #f7f6f1;
+      padding: 20px;
+      border-bottom: 1px solid #555;
+      box-shadow: 0px 0px 4px 2px #555;
+    }
+    .bleu {
+      font-family: Courier, monospace;
+    }
+    .logprob {
+      font-family: Courier, monospace;
+    }
+    </style>
 
-  <body>
+  <body onload="start()">
+      <script type="application/javascript">
+    // globals
+    var db = [];
+    var imgperm = [];
+    var current_img_i = 0;
+    function start() {
+        console.log("hi");
+      loadDataset('../static/result_struct.json');
+    }
+    function writeHeader() {
+      html = '<h2>Showing results for ' + db.checkpoint_params.dataset + ' on ' + db.imgblobs.length + ' images</h2>';
+      html += '<br>Eval params were: ' + JSON.stringify(db.params);
+      html += '<br>Final average BLEU was: ' + '(' + db.final_result.bleu[0].toFixed(2) + ',' + db.final_result.bleu[1].toFixed(2) + ',' + db.final_result.bleu[2].toFixed(2) + ')'
+      html += '<br>Final average perplexity of ground truth words: ' + db.gtppl.toFixed(2);
+      $("#blobsheader").html(html);
+    }
+    function renderNextImage() {
+      var ib = db.imgblobs[imgperm[current_img_i]]; // next image blob
+      var newdiv = d3.select("#blobs").append("div");
+      newdiv.attr("id", 'img'+current_img_i);
+      newdiv.attr("class", "idiv")
+      current_img_i++;
+      visImg(ib, newdiv); // function fills the pdiv with content
+    }
+    function visSentencesInit() {
+      $("#blobs").empty();
+      current_img_i = 0;
+      for(var i=0;i<20;i++) { renderNextImage(); }
+    }
+    // pix is index of the sentece
+    function visImg(ib, div) {
+      
+      // fetch the associated top image
+      var fname = ib.img_path;
+      var img = new Image();
+      img.src = fname;
+      img.onload = function() {
+        var width = this.width;
+        var height = this.height;
+        var desired_height = 300;
+        var hscale = desired_height / height;
+        var nwidth = width * hscale; 
+        var sdiv = div.append("div").attr('class', 'svgdiv');
+        var svg = sdiv.append("svg");
+        // okay now lets render the image
+        var svg_img = svg.append("image").attr("x", 0).attr("y", 0);
+        svg_img.attr('height', desired_height).attr('width', nwidth).attr('xlink:href', fname);
+        svg.attr('height', desired_height);
+        svg.attr('width', '100%');
+        // add human predictions
+        if('references' in ib && false) {
+          var dnew = div.append('div').attr('class','hannot annot').style('width', Math.floor(nwidth-6) + 'px');
+          insertAnnot(ib.references[0], dnew);
+        }
+        
+        // add predictions
+        if('candidate' in ib) {
+          var dnew = div.append('div').attr('class','rnnannot annot').style('width', Math.floor(nwidth-6) + 'px');
+          insertAnnot(ib.candidate, dnew);
+        }
+      }
+    }
+    function insertAnnot(annot, dnew) {
+      dnew.append('div').attr('class', 'atxt').text(annot.text);
+      dnew.append('div').attr('class', 'bleu').text('BLEU: (' + annot.bleu[0].toFixed(2) + ',' + annot.bleu[1].toFixed(2) + ',' + annot.bleu[2].toFixed(2) + ')');
+      dnew.append('div').attr('class', 'logprob').text('logprob: ' + annot.logprob.toFixed(2));
+    }
+    // Handle infinite Scroll
+    $(window).scroll(function() {
+      if($(window).scrollTop() > 0.9 * ($(document).height() - $(window).height())) {
+        if(current_img_i < imgperm.length) {
+          // try to stay 20 images ahead of the scroll
+          for(var q=0;q<20;q++) { renderNextImage(); }
+        }
+      }
+    });
+    
+    // Data Loading
+    function loadDataset(jsonpath) {
+      // ugly hack to prevent caching below ;(
+      var jsonmod = jsonpath + '?sigh=' + Math.floor(Math.random() * 100000);
+      $.getJSON(jsonpath, function(data) {
+        db = data; // assign to global
+        imgperm = randperm(db.imgblobs.length);
+        //imgperm = []; for(var i=0;i<db.imgblobs.length;i++) { imgperm.push(i); }
+        writeHeader();
+        visSentencesInit();
+      });
+    }
+
+    </script>
 
 <br><br><br>
 
@@ -93,80 +241,23 @@
     <div class="col-md-6">
     <div class="jumbotron">
     	<h1><span class="glyphicon glyphicon-comment" aria-hidden="true"></span></h1>
-    	<p><!-- start feedwind code --><script type="text/javascript">document.write('<script type="text/javascript" src="' + ('https:' == document.location.protocol ? 'https://' : 'http://') + 'feed.mikle.com/js/rssmikle.js"><' + '/script>');</script><script type="text/javascript">(function() {var params = {rssmikle_url: "http://feeds.bbci.co.uk/news/rss.xml?edition=uk",rssmikle_frame_width: "420",rssmikle_frame_height: "480",rssmikle_target: "_blank",rssmikle_font: "Arial, Helvetica, sans-serif",rssmikle_font_size: "12",rssmikle_border: "off",responsive: "off",rssmikle_css_url: "",text_align: "left",text_align2: "left",corner: "off",scrollbar: "off",autoscroll: "off",scrolldirection: "up",scrollstep: "3",mcspeed: "20",sort: "New",rssmikle_title: "off",rssmikle_title_sentence: "",rssmikle_title_link: "",rssmikle_title_bgcolor: "#FFFFFF",rssmikle_title_color: "#FFFFFF",rssmikle_title_bgimage: "",rssmikle_item_bgcolor: "#FFFFFF",rssmikle_item_bgimage: "",rssmikle_item_title_length: "55",rssmikle_item_title_color: "#000000",rssmikle_item_border_bottom: "on",rssmikle_item_description: "on",item_link: "off",rssmikle_item_description_length: "150",rssmikle_item_description_color: "#666666",rssmikle_item_date: "gl2",rssmikle_timezone: "Europe/London",datetime_format: "%b %e, %Y %l:%M:%S %p",item_description_style: "text+tn",item_thumbnail: "full",article_num: "3",rssmikle_item_podcast: "off",keyword_inc: "",keyword_exc: ""};feedwind_show_widget_iframe(params);})();</script><div style="font-size:10px; text-align:center; width:420; margin-top: -38px"><a href="http://feed.mikle.com/" target="_blank" style="color:#FFFFFF;">RSS Feed Widget</a><!--Please display the above link in your web page according to Terms of Service.--></div><!-- end feedwind code --></script>
+    	<p>
 		</p>
+    </div>
+    </div>
+    <div class="col-md-12">
+        <div id="header">
+            <h1>Sentence Generation Results</h1>
+            <div id="blobsheader"></div>
+          </div>
+        <div id="wrap">
+          <div id="wrap">
+            <div id="blobs"></div>
+          </div>
+        </div>
+    </div>
 
-</div>
-</div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../static/js/bootstrap.min.js"></script>
 
-    <script src="../static/js/jquery.socialist.js"></script>
-    <script src='../jquery.isotope.min.js'></script>
-
-    <script src="../static/js/socialstream.jquery.js"></script>
-
-    <script> 
-            /* <![CDATA[ */
-            /* ================ PINTEREST FEED ================ */
-            $('.pinterest-feed').socialstream({
-                socialnetwork: 'pinterest',
-                limit: 15,
-                username: 'vmrkela'
-            })
-        
-            /* ================ DEVIANT ART FEED ================ */
-            $('.deviant-feed').socialstream({
-                socialnetwork: 'deviantart',
-                limit: 15,
-                username: 'pixel-industry'
-            })
-             
-            /* ================ FLICKR FEED ================ */
-            $('.flickr-feed').socialstream({
-                socialnetwork: 'flickr',
-                limit: 15,
-                username: 'Mrky1'
-            })
-        
-            /* ================ DRIBBBLE FEED ================ */
-            $('.dribbble-feed').socialstream({
-                socialnetwork: 'dribbble',
-                limit: 15,
-                username: 'envato'
-            })
-        
-            /* ================ YOUTUBE FEED ================ */
-            $('.youtube-feed').socialstream({
-                socialnetwork: 'youtube',
-                limit: 15,
-                username: 'Envato'
-            })
-        
-            /* ================ NEWSFEED ================ */
-            $('.newsfeed').socialstream({
-                socialnetwork: 'newsfeed',
-                limit: 15,
-                username: ' http://feeds.feedburner.com/webdesignerdepot?format=xml'
-            })
-            
-            /* ================ INSTAGRAM FEED ================ */
-			$('.instagram-feed').socialstream({
-			    socialnetwork: 'instagram',
-			    limit: 9,
-			    username: 'jam.in'
-			})
-			
-			 /* ================ PICASA FEED ================ */
-			$('.picasa-feed').socialstream({
-				socialnetwork: 'picasa',
-				limit: 15,
-				username: 'vmrkela1@gmail.com'
-			});
-            /* ]]> */
-        </script>
   </body>
 
 </html>
