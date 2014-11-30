@@ -22,14 +22,27 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script>
-  (function() {
-    var cx = '000888210889775888983:j2sd6qidegs';
-    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
-    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-        '//www.google.com/cse/cse.js?cx=' + cx;
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
-  })();
-</script>
+      (function() {
+        var cx = '000888210889775888983:j2sd6qidegs';
+        var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+        gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//www.google.com/cse/cse.js?cx=' + cx;
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+      })();
+    </script>
+
+    <script src="../static/js/myo.js"></script>
+
+    <script type='text/javascript'>
+    var myMyo = Myo.create();
+    myMyo.on('fist', function(edge){
+        if(!edge) return;
+        window.open('http://127.0.0.1:5000', '_self');
+        console.log('Open Dashboard Command Sent');
+        myMyo.vibrate();
+    });
+
+    </script>
 
   </head>
 

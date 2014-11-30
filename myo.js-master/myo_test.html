@@ -1,0 +1,28 @@
+<DOCTYPE! html>
+
+
+<html>
+
+
+	<head>
+
+	<script src="myo.js"></script>
+
+	<script type='text/javascript'>
+	var myMyo = Myo.create();
+	myMyo.on('fingers_spread', function(edge){
+	    if(!edge) return;
+	    window.open('http://127.0.0.1:5000/', '_self');
+	    console.log('Hello Myo!');
+	    myMyo.vibrate();
+	});
+
+	</script>
+
+	</head>
+
+	<body>
+
+	</body>
+
+</html>
