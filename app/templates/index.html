@@ -26,12 +26,6 @@
         <script src="../static/vis_resources/d3.min.js" charset="utf-8"></script>
     <script src="../static/vis_resources/jsutils.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="http://cs.stanford.edu/people/karpathy/cssutils.css">
-    <script type="text/javascript">
-        $('.idiv').mouseenter(function() {
-            var utterance = new SpeechSynthesisUtterance($(this).find('.atxt').text());
-            window.speechSynthesis.speak(utterance);
-        })
-    </script>
   </head>
       <style>
     body {
@@ -183,7 +177,7 @@
 
 <br><br><br>
 
-<div class="container">
+<div class="container" onload=>
 <div class="row">
 	<div class="col-md-6">
     <div class="jumbotron">
@@ -252,12 +246,21 @@
           </div>
         <div id="wrap">
           <div id="wrap">
-            <div id="blobs"></div>
+            <div id="blobs" onload="speak()"></div>
           </div>
         </div>
     </div>
 
 
   </body>
+    <script type="text/javascript">
+		function speak(){ 
+		console.log("test");
+		$('.idiv').mouseenter(function() {
+			console.log();
+            var utterance = new SpeechSynthesisUtterance($(this).find(".atxt").html());
+            window.speechSynthesis.speak(utterance);
+        })}
+    </script>
 
 </html>
