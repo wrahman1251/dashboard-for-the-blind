@@ -13,6 +13,7 @@ html {
 body {
   margin: 0;
 }
+
 article,
 aside,
 details,
@@ -63,6 +64,9 @@ dfn {
 h1 {
   margin: .67em 0;
   font-size: 2em;
+}
+h1.main {
+  color: #fff !important;
 }
 mark {
   color: #000;
@@ -904,7 +908,6 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
 }
 input,
 button,

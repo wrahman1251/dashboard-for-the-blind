@@ -1,5 +1,18 @@
 body{
-	background: #333;
+	background-image: url(../img/bg.png) !important;
+	background-repeat: repeat;
+}
+
+h1.main {
+  color: #ec543a !important;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 72px;
+}
+
+.glyphicon {
+	  color: #ae9e96 !important;
+
 }
 .social-feed{
 	width: 500px;
@@ -7,6 +20,10 @@ body{
 	display: block;
 	display: table;
 	margin-left: -40px;
+}
+
+div.rss2html-note {
+	color: #eee !important;
 }
 
 .clearfix{
