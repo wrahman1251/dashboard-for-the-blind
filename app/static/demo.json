@@ -1,0 +1,119 @@
+{"final_result": {"bleu": [0.5215598143471595, 0.33063960645764223, 0.15846902253531325]}, "checkpoint_params": {"grad_clip": 1.0, "../static/dataset": "flickr8k", "image_encoding_size": 512, "eval_max_images": -1, "drop_prob_decoder": 0.5, "word_encoding_size": 512, "max_epochs": 30, "eval_batch_size": 100, "fappend": "google", "generator": "lstm", "write_checkpoint_ppl_threshold": 25.0, "decay_rate": 0.997, "tanhC_version": 1, "hidden_size": 512, "momentum": 0.0, "worker_status_output_directory": "/scail/u/karpathy/rnn-image-describer/status", "learning_rate": 0.000478, "checkpoint_output_directory": "/scail/u/karpathy/rnn-image-describer/cv", "do_grad_check": 0, "word_count_threshold": 5, "batch_size": 128, "regc": 3.48e-07, "smooth_eps": 1e-08, "solver": "rmsprop", "eval_period": 0.5, "drop_prob_encoder": 0.5},
+	"imgblobs": [
+
+		{"imgid": 7541, "references": [
+	{"text": "a child is happily playing on the slide"},
+	{"text": "a child is holding on to the top of a playground slide"},
+	{"text": "a child is preparing to slide down a piece of playground equipment"},
+	{"text": "a toddler all bundled up getting ready to go down a slide"},
+	{"text": "child getting ready to go down a slide"}], "img_path": "../static/data/flickr8k/imgs/2358554995_54ed3baa83.jpg", "candidate": 
+	{"bleu": [0.46153846153846156, 0.19611613513818402, 0], "text": "a child in a red shirt is sitting on a red slide .", "logprob": -12.778334203785333}},
+
+	{"imgid": 7647, "references": [
+	{"text": "there are women in st patrick s day costumes"},
+	{"text": "three women celebrate st patrick s day by dressing up in green and white on a busy street"},
+	{"text": "three women dressed in green celebrating st patricks day"},
+	{"text": "three women dressed up in green and shamrocks"},
+	{"text": "three women wearing plenty of green and shamrocks"}], "img_path": "../static/data/flickr8k/imgs/424779662_568f9606d0.jpg", "candidate": 
+	{"bleu": [0.3333333333333333, 0, 0], "text": "a group of people are standing in front of a building .", "logprob": -10.413228399241572}},
+
+	{"imgid": 7948, "references": [
+	{"text": "a child dressed for the cold sits in the snow"},
+	{"text": "a child in red sits in the snow"},
+	{"text": "a little girl in a red snowsuit sits on a snowball in a backyard"},
+	{"text": "little kid in red snowsuit with hello kitty mittens"},
+	{"text": "the small girl in the hello kitty gloves and red snowsuit smiles while sitting on a large snowball"}], "img_path": "../static/data/flickr8k/imgs/3320032226_63390d74a6.jpg", "candidate": 
+	{"bleu": [0.4375, 0.38188130791298663, 0.27516060407455223], "text": "a child in a red coat and red pants is skiing down a snowy hill .", "logprob": -15.86384816351271}},
+
+	{"imgid": 7038, "references": [
+	{"text": "a basketball player wearing a black and white uniform dribbles the ball"},
+	{"text": "at a women s basketball game a white skinned woman dribbles against the chicago defense"},
+	{"text": "basketball players in action"},
+	{"text": "the basketball player in white is dribbling the ball towards the player in black"},
+	{"text": "woman in white dribbling basketball"}], "img_path": "../static/data/flickr8k/imgs/3222055946_45f7293bb2.jpg", "candidate": 
+	{"bleu": [0.6923076923076923, 0.5370861555295747, 0.37431888796616686], "text": "a basketball player in a white uniform is playing with a ball .", "logprob": -12.757823308687655}},
+
+	{"imgid": 7706, "references": [
+	{"text": "four girls in evening attire pose for a picture"},
+	{"text": "four girls in evening wear are posing for a photograph"},
+	{"text": "four woman wearing formal gowns pose together and smile"},
+	{"text": "four women are standing together posing for a picture"},
+	{"text": "four women in dresses pose together"}], "img_path": "../static/data/flickr8k/imgs/3044500219_778f9f2b71.jpg", "candidate": 
+	{"bleu": [0.30769230769230765, 0.16012815380508713, 0], "text": "a group of people are gathered together and one has a drink .", "logprob": -15.423802949284667}},
+
+	{"imgid": 7923, "references": [
+	{"text": "a hiker in a red on a snowy peak"},
+	{"text": "a person in a red jacket and a red hardhat stands near a mountain"},
+	{"text": "a person wearing a red jacket and helmet walks up near the large rock"},
+	{"text": "a woman wearing a red work man s hat and red jacket is hiking in the snow topped mountains"},
+	{"text": "the person wearing the red hardhat is on the mountain"}], "img_path": "../static/data/flickr8k/imgs/416960865_048fd3f294.jpg", "candidate": 
+	{"bleu": [0.8, 0.6324555320336759, 0.5358322898371244], "text": "a man in a red jacket and a helmet is standing in the snow .", "logprob": -14.42225163559924}},
+
+	{"imgid": 7654, "references": [
+	{"text": "a boy is kicking up dust as he runs in the dirt by a tree"},
+	{"text": "a boy wearing brown running in dirt"},
+	{"text": "a dirty boy runs through the dirt"},
+	{"text": "a dusty boy runs along a dirt path through the grass"},
+	{"text": "a teenage boy runs through the dirt near a house in the country"}], "img_path": "../static/data/flickr8k/imgs/2480850054_de3433b54a.jpg", "candidate": 
+	{"bleu": [0.42857142857142855, 0, 0], "text": "a little girl in a pink dress is running through a grassy area .", "logprob": -13.74726354410366}},
+
+	{"imgid": 7487, "references": [
+	{"text": "a person is holding a camera while a skier does a trick"},
+	{"text": "a skier doing a trick by a snow mound while a man films it with a camera"},
+	{"text": "a skier is being filmed by a man with video camera on a jib"},
+	{"text": "a skier wearing blue snow pants is flying through the air near a jump"},
+	{"text": "a skier stands on his hands in the snow in front of a movie camera"}], "img_path": "../static/data/flickr8k/imgs/3354330935_de75be9d2f.jpg", "candidate": 
+	{"bleu": [0.3333333333333333, 0, 0], "text": "a snowboarder is jumping over a snowy hill .", "logprob": -8.12114063140727}},
+
+	{"imgid": 7573, "references": [
+	{"text": "a boy sitting in water"},
+	{"text": "a small boy is sitting in the water and water is splashing up through his legs"},
+	{"text": "a young boy in a swimming suit sits in water"},
+	{"text": "a young boy sitting on a water jet in a pool"},
+	{"text": "little boy sitting in water with a fountain coming up through his lap"}], "img_path": "../static/data/flickr8k/imgs/1287475186_2dee85f1a5.jpg", "candidate": 
+	{"bleu": [0.875, 0.7905694150420949, 0.7469007910928608], "text": "a young boy in a swimming pool .", "logprob": -7.5783790024341418}},
+
+	{"imgid": 7996, "references": [
+	{"text": "a boy in a red suit plays in the water"},
+	{"text": "a boy in a red swimsuit jumps into the water to join two people"},
+	{"text": "a boy takes a flying leap into the water"},
+	{"text": "the boy in the red shorts jumps into the water to join other people"},
+	{"text": "the boy wearing red shorts is jumping into the river as other children swim"}], "img_path": "../static/data/flickr8k/imgs/3430607596_7e4f74e3ff.jpg", "candidate": 
+	{"bleu": [0.6666666666666666, 0.5, 0.32931687800417475], "text": "a boy is jumping into a swimming pool .", "logprob": -7.6380546678172347}},
+
+	{"imgid": 7366, "references": [
+	{"text": "a man is skiing down a mountain"},
+	{"text": "a person dressed in red and grey is skiing down a snowy slope"},
+	{"text": "a skier is throwing up snow as he skis off piste"},
+	{"text": "a skier skiing downhill in a cloud of snow"},
+	{"text": "a skier wearing white sunglasses is skiing down a snowy mountain very fast"}], "img_path": "../static/data/flickr8k/imgs/3255482333_5bcee79f7e.jpg", "candidate": 
+	{"bleu": [0.7777777777777778, 0.7637626158259734, 0.6933612743506347], "text": "a skier is skiing down a snowy hill .", "logprob": -6.6139181026393539}},
+
+	{"imgid": 7417, "references": [
+	{"text": "a male and female on a one seat bike ride along a tree lined road"},
+	{"text": "a man rides a bicycle while a young girl holds onto the back of him"},
+	{"text": "a young girl is standing on the back of a man s bicycle while the man peddles forward"},
+	{"text": "man on bike with female standing on rear of back with arms around his neck"},
+	{"text": "one kid is towing another on his bike"}], "img_path": "../static/data/flickr8k/imgs/3485425825_c2f3446e73.jpg", "candidate": 
+	{"bleu": [0.4444444444444444, 0.28005601680560194, 0], "text": "a man in a red shirt and a black shirt is riding a bicycle on a street .", "logprob": -19.039641733914564}},
+
+	{"imgid": 7738, "references": [
+	{"text": "a boy with a blue helmet is riding a bike"},
+	{"text": "a young boy has his mouth open as he rides his bike outdoors past a stone wall"},
+	{"text": "a young boy is riding a bike"},
+	{"text": "a young boy wearing a helmet and riding a bike in a park"},
+	{"text": "the boy with the red and blue helmet rides his bicycle"}], "img_path": "../static/data/flickr8k/imgs/3549583146_3e8bb2f7e9.jpg", "candidate": 
+	{"bleu": [0.5882352941176471, 0.42874646285627205, 0.290478022246353], "text": "a man wearing a black shirt and blue jeans is riding a bike on a street .", "logprob": -16.595827437678693}},
+
+	{"imgid": 7255, "references": [
+	{"text": "an adult and a child run on the beach"},
+	{"text": "a woman and a little girl playing in the sand next to the ocean"},
+	{"text": "two people run down the beach and one of them is pointing"},
+	{"text": "two people running on a beach"},
+	{"text": "two people running on the shore of a beach"}], "img_path": "../static/data/flickr8k/imgs/1982852140_56425fa7a2.jpg", "candidate": 
+	{"bleu": [0.6363636363636364, 0.504524979109513, 0.304677894412465], "text": "a man and a woman are walking on the beach .", "logprob": -10.610737184097042}}
+
+
+
+	]
+}
